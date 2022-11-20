@@ -52,7 +52,7 @@ func InitConfig() {
 			Res:      &GUILD_ID,
 			Required: true,
 		},
-		"RELAY_CHANNELS": {
+		"RELAY_CHAN": {
 			Res: &rawRelayChannels,
 			Required: true,
 		},
