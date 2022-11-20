@@ -1,4 +1,4 @@
-module shadygoat.eu/IRCRelayBot
+module github.com/ShadiestGoat/DiscordIRCRelay
 
 go 1.19
 
