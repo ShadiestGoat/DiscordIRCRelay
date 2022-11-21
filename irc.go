@@ -1,6 +1,7 @@
 package main
 
 import (
+	"regexp"
 	"strings"
 
 	"github.com/bwmarrin/discordgo"
@@ -55,7 +56,13 @@ func OnDiscordMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if name == "" {
 		name = m.Author.Username
 	}
-	nline := strings.Split(m.Content, "\n")
+
+	content := m.Content
+	for _, u := range m.Mentions {
+		content = regexp.MustCompile(`<@!?` + u.ID + `>`).ReplaceAllString(content, u.Username)
+	}
+
+	nline := strings.Split(content, "\n")
 	for _, att := range m.Attachments {
 		nline = append(nline, att.URL)
 	}
