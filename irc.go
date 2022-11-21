@@ -55,8 +55,11 @@ func OnDiscordMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if name == "" {
 		name = m.Author.Username
 	}
-	IRCConn.Nick(strings.ReplaceAll(name, " ", "_"))
 	nline := strings.Split(m.Content, "\n")
+	for _, att := range m.Attachments {
+		nline = append(nline, att.URL)
+	}
+	IRCConn.Nick(strings.ReplaceAll(name, " ", "_"))
 	for _, content := range nline {
 		IRCConn.Privmsg("#" + RELAY.IRC, content)
 	}
